@@ -1,0 +1,19 @@
+- name: Ensure database is created
+  postgresql_db: name={{ pg_db_name }}
+                 encoding={{ pg_encoding }}
+                 lc_collate={{ pg_locale }}.{{ pg_encoding }}
+                 lc_ctype={{ pg_locale }}.{{ pg_encoding }}
+                 template='template0'
+                 state=present
+
+- name: Ensure user have access to the database
+  postgresql_user: db={{ pg_db_name }}
+                   name={{ pg_user }}
+                   password={{ pg_password |default(omit) }}
+                   priv=ALL
+                   state=present
+
+- name: Ensure user does not have unnecessary privileges
+  postgresql_user: name={{ pg_user }}
+                   role_attr_flags=NOSUPERUSER,NOCREATEDB
+                   state=present

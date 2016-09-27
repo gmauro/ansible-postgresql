@@ -1,0 +1,25 @@
+
+- include: install_packages.yml
+  vars:
+    pg_version: 9.4
+  become: yes
+  when:
+    - pg_install_packages
+    - ansible_distribution == 'Debian'
+    - ansible_distribution_version >= 8
+
+- include: install_packages.yml
+  vars:
+    pg_version: 9.5
+  become: yes
+  when:
+    - pg_install_packages
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == "16.04"
+
+- include: setup.yml
+  become: yes
+  become_user: postgres
+  when: pg_setup
+
+
