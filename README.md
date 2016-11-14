@@ -1,5 +1,6 @@
 # Ansible PostgreSQL
-An [Ansible](http://www.ansible.com/) role to install a PostgreSQL server on Ubuntu or Debian systems
+An [Ansible](http://www.ansible.com/) role to install a PostgreSQL server on Ubuntu or Debian systems  
+[![Build Status](https://travis-ci.org/gmauro/ansible-postgresql.svg?branch=master)](https://travis-ci.org/gmauro/ansible-postgresql)
 
 ## Requirements
 This role requires Ansible 2.0+. See [Ansible installation](http://docs.ansible.com/ansible/intro_installation.html)
