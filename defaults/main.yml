@@ -1,11 +1,16 @@
 # Default variables used during the Postgresql setup phase.
 
 pg_version: 9.5
+pg_conf: "/etc/postgresql/{{ pg_version }}/main/postgresql.conf"
+pg_hba: "/etc/postgresql/{{ pg_version }}/main/pg_hba.conf"
+
+pg_service_name: postgresql
 
 pg_install_packages: yes
 pg_packages_state: present
 pg_setup: yes
 pg_drop_db: no
+pg_extend: no
 
 pg_locale: en_US
 pg_encoding: UTF-8

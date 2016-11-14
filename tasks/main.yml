@@ -22,7 +22,6 @@
     - ansible_distribution_version == "16.04"
 
 - include: install_packages.yml
-  become: yes
   when: pg_install_packages
 
 - include: setup.yml
@@ -31,5 +30,11 @@
   become_user: postgres
   when: pg_setup
 
+- include: extend_conf.yml
+  notify: Reload PostgreSQL
+  when: pg_extend
+
 - include: cleaning.yml
-  become: yes
+
+- name: Ensure PostgreSQL is running
+  service: name={{ pg_service_name }} enabled=yes state=started
