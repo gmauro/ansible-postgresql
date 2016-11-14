@@ -1,0 +1,8 @@
+- name: apt clean
+  command: apt-get clean
+
+- name: apt autoclean
+  command: apt-get autoclean
+
+- name: apt autoremove
+  command: apt-get autoremove

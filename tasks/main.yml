@@ -1,25 +1,35 @@
+# see https://www.debian.org/releases/ or http://releases.ubuntu.com/
 
-- include: install_packages.yml
+- include: add_apt_repo.yml
   vars:
-    pg_version: 9.4
-  become: yes
+    distribution_codename: jessie
   when:
-    - pg_install_packages
     - ansible_distribution == 'Debian'
     - ansible_distribution_version >= 8
 
-- include: install_packages.yml
+- include: add_apt_repo.yml
   vars:
-    pg_version: 9.5
-  become: yes
+    distribution_codename: trusty
   when:
-    - pg_install_packages
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == "14.04"
+
+- include: add_apt_repo.yml
+  vars:
+    distribution_codename: xenial
+  when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version == "16.04"
 
+- include: install_packages.yml
+  become: yes
+  when: pg_install_packages
+
 - include: setup.yml
   become: yes
+  become_method: su
   become_user: postgres
   when: pg_setup
 
-
+- include: cleaning.yml
+  become: yes

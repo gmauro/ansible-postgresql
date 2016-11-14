@@ -1,5 +1,7 @@
 # Default variables used during the Postgresql setup phase.
 
+pg_version: 9.5
+
 pg_install_packages: yes
 pg_packages_state: present
 pg_setup: yes
