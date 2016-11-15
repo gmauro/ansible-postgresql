@@ -1,10 +1,7 @@
-- name: Add IP address(es) to listen on
-  lineinfile: dest={{ pg_conf }} line="listen_addresses='*'"
-
 - name: Add postgresql configuration
   lineinfile: dest={{ item.dst }} line={{ item.line }}
   with_items:
-    - {dst: '{{ pg_conf }}', line: "listen_addresses='*'" }
+    - {dst: '{{ pg_conf }}', line: "listen_addresses = '*'" }
     - {dst: '{{ pg_hba }}', line: 'host all  all    0.0.0.0/0  md5' }
 
 - name: Modify postgresql configuration
