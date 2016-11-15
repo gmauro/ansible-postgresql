@@ -1,10 +1,9 @@
 FROM gmauro/ansible:2.1-debian
 
-ENV DEBIAN_FRONTEND noninteractive
+WORKDIR /tmp
 
-RUN mkdir /tmp/ansible
-WORKDIR /tmp/ansible
-ADD local.yml /tmp/ansible/local.yml
-ADD defaults /tmp/ansible/defaults
-ADD tasks /tmp/ansible/tasks
-RUN ansible-playbook -i localhost, local.yml -e "@defaults/main.yml"
+ADD local.yml /tmp/local.yml
+ADD vars /tmp/vars
+ADD tasks /tmp/tasks
+
+RUN ansible-playbook -i localhost, local.yml -e "@vars/main.yml"

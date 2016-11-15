@@ -18,4 +18,3 @@ pg_encoding: UTF-8
 pg_db_name: dbname
 pg_user: username
 pg_password: password
-
