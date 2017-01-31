@@ -29,4 +29,5 @@
   when: pg_drop_db
 
 - name: ensure that postgresql is started
-  service: name=postgresql state=running enabled=yes
+  service: name={{ pg_service_name }} enabled=yes state=started
+

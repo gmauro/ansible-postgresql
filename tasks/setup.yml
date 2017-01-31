@@ -9,7 +9,7 @@
 - name: Ensure user have access to the database
   postgresql_user: db={{ pg_db_name }}
                    name={{ pg_user }}
-                   password={{ pg_password |default(omit) }}
+                   password={{ pg_password | default(omit) }}
                    priv=ALL
                    state=present
 

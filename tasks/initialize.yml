@@ -1,0 +1,8 @@
+- name: Copy sql file from local to remote path
+  copy: src={{ sql_file_src_path }} dest={{ sql_file_dest_path }} force=yes
+
+- name: Deploy the SQL file to the PostgreSQL server
+  become: yes
+  become_method: su
+  become_user: postgres
+  command: "psql -U {{ pg_user }} {{ pg_db_name }} < {{ sql_file_dest_path }}"

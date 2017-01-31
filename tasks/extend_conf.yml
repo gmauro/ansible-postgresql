@@ -6,3 +6,6 @@
 
 - name: Modify postgresql configuration
   replace: dest='{{ pg_hba }}' regexp='peer' replace='trust'
+
+- name: Restart PostgreSQL
+  service: name={{ pg_service_name }} state=restarted

@@ -10,7 +10,8 @@ pg_install_packages: yes
 pg_packages_state: present
 pg_setup: yes
 pg_drop_db: no
-pg_extend: no
+pg_extend: yes
+pg_initialize: no
 
 pg_locale: en_US
 pg_encoding: UTF-8
@@ -18,3 +19,6 @@ pg_encoding: UTF-8
 pg_db_name: dbname
 pg_user: username
 pg_password: password
+
+sql_file_src_path: null
+sql_file_dest_path: /tmp/init_file.sql

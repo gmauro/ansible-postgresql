@@ -31,10 +31,13 @@
   when: pg_setup
 
 - include: extend_conf.yml
-  notify: Reload PostgreSQL
   when: pg_extend
+
+- include: initialize.yml
+  when: pg_initialize and sql_file_src_path
 
 - include: cleaning.yml
 
-- name: Ensure PostgreSQL is running
+- name: Ensure PostgreSQL is enabled and running
   service: name={{ pg_service_name }} enabled=yes state=started
+
