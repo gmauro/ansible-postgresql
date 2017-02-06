@@ -1,0 +1,13 @@
+- name: install packages needed
+  apt: name={{ item }} state={{ pg_packages_state }} update_cache=yes
+  with_items:
+    - locales
+
+- name: Ensure a locale exists.
+  locale_gen: name={{ pg_locale }}.{{ pg_encoding }} state=present
+
+- name: install Postgresql client packages
+  apt: name={{ item }} state={{ pg_packages_state }} update_cache=yes
+  with_items:
+    - postgresql-client-{{ pg_version }}
+    - python-psycopg2

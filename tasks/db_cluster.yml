@@ -1,0 +1,12 @@
+- name: drop existing db cluster
+  command: pg_dropcluster --stop {{ pg_version }} main
+  register: command_result
+  failed_when: "'FAILED' in command_result.stderr"
+
+- name: create a new db cluster
+  command: pg_createcluster --locale {{ pg_locale }}.{{ pg_encoding }} --start {{ pg_version }} main
+  register: command_result
+  failed_when: "'FAILED' in command_result.stderr"
+
+- name: ensure that postgresql is started
+  service: name={{ pg_service_name }} enabled=yes state=started

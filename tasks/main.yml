@@ -21,23 +21,28 @@
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version == "16.04"
 
+- include: first_setup.yml
+
 - include: install_packages.yml
-  when: pg_install_packages
+  when: pg_install_server_packages
+
+- include: db_cluster.yml
+  when: pg_drop_db and pg_install_server_packages
 
 - include: setup.yml
   become: yes
   become_method: su
   become_user: postgres
-  when: pg_setup
+  when: pg_setup and pg_install_server_packages
 
 - include: extend_conf.yml
-  when: pg_extend
+  when: pg_extend and  pg_install_server_packages
 
 - include: initialize.yml
-  when: pg_initialize and sql_file_src_path
+  when: pg_initialize and sql_file_src_path and pg_install_server_packages
 
 - include: cleaning.yml
 
 - name: Ensure PostgreSQL is enabled and running
   service: name={{ pg_service_name }} enabled=yes state=started
-
+  when: pg_install_server_packages

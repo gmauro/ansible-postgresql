@@ -6,7 +6,7 @@ pg_hba: "/etc/postgresql/{{ pg_version }}/main/pg_hba.conf"
 
 pg_service_name: postgresql
 
-pg_install_packages: yes
+pg_install_server_packages: yes
 pg_packages_state: present
 pg_setup: yes
 pg_drop_db: no
