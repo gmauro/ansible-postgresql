@@ -2,4 +2,4 @@
   apt_key: id=ACCC4CF8 url='https://www.postgresql.org/media/keys/ACCC4CF8.asc' state=present
 
 - name: Create the repo source file
-  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ {{ distribution_codename }}-pgdg main' state=present filename='pgdg'
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main' state=present filename='pgdg'
