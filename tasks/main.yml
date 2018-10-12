@@ -1,18 +1,22 @@
 # see https://www.debian.org/releases/ or http://releases.ubuntu.com/
 
 - include: add_apt_repo.yml
+  become: yes
   when:
     - ansible_distribution == 'Debian'
     - ansible_distribution_version >= 5
 
 - include: add_apt_repo.yml
+  become: yes
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_major_version >= 12
 
 - include: first_setup.yml
+  become: yes
 
 - include: install_packages.yml
+  become: yes
   when: pg_install_server_packages
 
 - include: db_cluster.yml
@@ -20,17 +24,19 @@
 
 - include: setup.yml
   become: yes
-  become_method: su
+  become_method: sudo
   become_user: postgres
   when: pg_setup and pg_install_server_packages
 
 - include: extend_conf.yml
+  become: yes
   when: pg_extend and  pg_install_server_packages
 
 - include: initialize.yml
   when: pg_initialize and sql_file_src_path and pg_install_server_packages
 
 - include: cleaning.yml
+  become: yes
 
 - name: Ensure PostgreSQL is enabled and running
   service: name={{ pg_service_name }} enabled=yes state=started
