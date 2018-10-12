@@ -1,8 +1,7 @@
-- name: apt clean
-  command: apt-get clean
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
 
-- name: apt autoclean
-  command: apt-get autoclean
-
-- name: apt autoremove
-  command: apt-get autoremove
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
