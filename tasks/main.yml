@@ -1,43 +1,43 @@
 # see https://www.debian.org/releases/ or http://releases.ubuntu.com/
 
-- include: add_apt_repo.yml
+- import_playbook: add_apt_repo.yml
   become: yes
   when:
     - ansible_distribution == 'Debian'
     - ansible_distribution_version >= 5
 
-- include: add_apt_repo.yml
+- import_playbook: add_apt_repo.yml
   become: yes
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_major_version >= 12
 
-- include: first_setup.yml
+- import_playbook: first_setup.yml
   become: yes
 
-- include: install_packages.yml
+- import_playbook: install_packages.yml
   become: yes
   when: pg_install_server_packages
 
-- include: db_cluster.yml
+- import_playbook: db_cluster.yml
   when: pg_drop_db and pg_install_server_packages
 
-- include: setup.yml
+- import_playbook: setup.yml
   become: yes
-  become_method: sudo
   become_user: postgres
   when: pg_setup and pg_install_server_packages
 
-- include: extend_conf.yml
+- import_playbook: extend_conf.yml
   become: yes
   when: pg_extend and  pg_install_server_packages
 
-- include: initialize.yml
+- import_playbook: initialize.yml
   when: pg_initialize and sql_file_src_path and pg_install_server_packages
 
-- include: cleaning.yml
+- import_playbook: cleaning.yml
   become: yes
 
 - name: Ensure PostgreSQL is enabled and running
   service: name={{ pg_service_name }} enabled=yes state=started
+  become: yes
   when: pg_install_server_packages
