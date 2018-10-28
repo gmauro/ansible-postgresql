@@ -1,6 +1,10 @@
 - name: install Postgresql server packages
-  apt: name={{ item }} state={{ pg_packages_state }} update_cache=yes
-  with_items:
+  apt:
+    name: "{{ packages }}"
+    state: "{{ pg_packages_state }}"
+    update_cache: yes
+  vars:
+    packages:
     - postgresql-{{ pg_version }}
     - postgresql-contrib-{{ pg_version }}
     - postgresql-plpython-{{ pg_version }}
