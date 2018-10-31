@@ -3,7 +3,8 @@ An [Ansible](http://www.ansible.com/) role to install a PostgreSQL server on Ubu
 [![Build Status](https://travis-ci.org/gmauro/ansible-postgresql.svg?branch=master)](https://travis-ci.org/gmauro/ansible-postgresql)
 
 ## Requirements
-This role requires Ansible 2.0+. See [Ansible installation](http://docs.ansible.com/ansible/intro_installation.html)
+This role requires Ansible **2.4+**.  
+See [Ansible installation](http://docs.ansible.com/ansible/intro_installation.html)
 
 ## Variables
  * _**pg_version**_: Version of postgres to install. The default is **9.5**  
