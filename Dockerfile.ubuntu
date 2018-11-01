@@ -3,7 +3,7 @@ FROM gmauro/ansible:2.6_ubuntu16.04
 WORKDIR /tmp
 
 ADD local.yml /tmp/local.yml
-ADD vars /tmp/vars
+ADD defaults /tmp/vars
 ADD tasks /tmp/tasks
 
 RUN ansible-playbook -i localhost, local.yml -e "@vars/main.yml"
